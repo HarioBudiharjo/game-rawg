@@ -28,30 +28,30 @@ struct GameRow: View {
                     .foregroundColor(Color(.black))
                     .aspectRatio(contentMode: .fill)
                     .frame(width:120)
-                .clipShape(Circle())
+                    .clipShape(Circle())
             } else {
                 Text("Loading Image...")
             }
             
             VStack {
                 Spacer()
+                HStack {
                     Text(game.judul)
                         .font(.system(size: 16, weight: .bold))
                         .lineLimit(2)
-                        .foregroundColor(.white)
                         .padding(5)
-                        .background(Color.blue)
-                        .cornerRadius(5)
+                    Spacer()
+                }
                 Spacer()
                 HStack{
-                    Spacer()
                     Text("Release : "+game.tanggalRilis)
-                    .font(.system(size: 11, weight: .regular))
+                        .font(.system(size: 11, weight: .regular))
+                    Spacer()
                 }
                 HStack{
-                    Spacer()
                     Text("Rate: \(game.peringkat.format())")
-                    .font(.system(size: 11, weight: .regular))
+                        .font(.system(size: 11, weight: .regular))
+                    Spacer()
                 }
             }
         }.frame(height: 130)
