@@ -7,31 +7,43 @@
 //
 
 import SwiftUI
-import URLImage
 
 struct GameRow: View {
     
     var game: Game
+    var gambarIsAvailable : Bool
     @ObservedObject var imageLoader : ImageLoader
     
     init(game : Game) {
         self.game = game
         imageLoader = ImageLoader(urlString: game.gambar)
+        gambarIsAvailable = game.gambar == "Unavailable!" ? false : true
+        if gambarIsAvailable {
+            imageLoader.getDataImage()
+        }
     }
     
     var body: some View {
         HStack {
-            
-            if imageLoader.dataIsValid {
-                Image(uiImage: imageLoader.imageFromData())
-                    .resizable()
-                    .foregroundColor(Color(.black))
-                    .aspectRatio(contentMode: .fill)
-                    .frame(width:120)
-                    .clipShape(Circle())
+            if gambarIsAvailable {
+                if imageLoader.requestDone {
+                    if imageLoader.dataIsValid {
+                        Image(uiImage: imageLoader.imageFromData())
+                            .resizable()
+                            .foregroundColor(Color(.black))
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width:120)
+                            .clipShape(Circle())
+                    } else {
+                        Text("Image Empty")
+                    }
+                } else {
+                    Text("Loading Image...")
+                }
             } else {
-                Text("Loading Image...")
+                Text("Image Empty")
             }
+
             
             VStack {
                 Spacer()

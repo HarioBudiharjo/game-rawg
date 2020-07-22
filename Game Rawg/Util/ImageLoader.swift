@@ -11,18 +11,30 @@ import UIKit
 
 class ImageLoader: ObservableObject {
     @Published var dataIsValid = false
+    @Published var requestDone = false
     var data:Data?
+    var url: String
 
     init(urlString:String) {
-        guard let url = URL(string: urlString) else { return }
+        self.url = urlString
+    }
+    
+    func getDataImage(){
+        guard let url = URL(string: self.url) else {
+            dataIsValid = false
+            requestDone = true
+            return
+        }
         let task = URLSession.shared.dataTask(with: url) { data, response, error in
             guard let data = data else { return }
             DispatchQueue.main.async {
+                self.requestDone = true
                 self.dataIsValid = true
                 self.data = data
             }
         }
         task.resume()
+
     }
     
     func imageFromData() -> UIImage {

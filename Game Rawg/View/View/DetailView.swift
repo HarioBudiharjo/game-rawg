@@ -11,13 +11,17 @@ import SwiftUI
 struct DetailView: View {
     
     var game : Game
-    
+    var gambarIsAvailable : Bool
     @ObservedObject var imageLoader : ImageLoader
     @ObservedObject var viewmodel = GameViewModel()
     
     init(game:Game) {
         self.game = game
         imageLoader = ImageLoader(urlString: game.gambar)
+        gambarIsAvailable = game.gambar == "Unavailable!" ? false : true
+        if gambarIsAvailable {
+            imageLoader.getDataImage()
+        }
     }
     
     var body: some View {
@@ -29,11 +33,23 @@ struct DetailView: View {
             } else {
                 ScrollView{
                     VStack {
-                        Image(uiImage: (imageLoader.dataIsValid ? imageLoader.imageFromData() : UIImage(systemName: "questionmark")!))
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .foregroundColor(Color(.black))
-                            .frame(height:120)
+                        if gambarIsAvailable {
+                            if imageLoader.requestDone {
+                                if imageLoader.dataIsValid {
+                                    Image(uiImage: imageLoader.imageFromData())
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                        .foregroundColor(Color(.black))
+                                        .frame(height:120)
+                                } else {
+                                    Text("Image Empty")
+                                }
+                            } else {
+                                Text("Loading Image...")
+                            }
+                        } else {
+                            Text("Image Empty")
+                        }
                         
                         Text(viewmodel.game.judul)
                             .font(.system(size: 16, weight: .bold))
