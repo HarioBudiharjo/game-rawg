@@ -13,9 +13,9 @@ class ImageLoader: ObservableObject {
     @Published var dataIsValid = false
     @Published var requestDone = false
     var data:Data?
-    var url: String
-
-    init(urlString:String) {
+    var url: String = ""
+    
+    func setUrl(urlString:String){
         self.url = urlString
     }
     
