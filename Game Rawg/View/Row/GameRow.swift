@@ -12,15 +12,12 @@ struct GameRow: View {
     
     var game: Game
     var gambarIsAvailable : Bool
-    @ObservedObject var imageLoader : ImageLoader
+    var favorite = false
+    @ObservedObject var imageLoader : ImageLoader = ImageLoader()
     
     init(game : Game) {
         self.game = game
-        imageLoader = ImageLoader(urlString: game.gambar)
         gambarIsAvailable = game.gambar == "Unavailable!" ? false : true
-        if gambarIsAvailable {
-            imageLoader.getDataImage()
-        }
     }
     
     var body: some View {
@@ -66,6 +63,11 @@ struct GameRow: View {
                     Spacer()
                 }
             }
-        }.frame(height: 130)
+        }.frame(height: 130).onAppear{
+            self.imageLoader.setUrl(urlString: self.game.gambar)
+            if self.gambarIsAvailable {
+                self.imageLoader.getDataImage()
+            }
+        }
     }
 }
