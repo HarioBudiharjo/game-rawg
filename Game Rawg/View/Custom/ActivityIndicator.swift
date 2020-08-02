@@ -32,9 +32,3 @@ struct ActivityIndicator: View {
         }
     }
 }
-
-struct ActivityIndicator_Previews: PreviewProvider {
-    static var previews: some View {
-        ActivityIndicator(size: 75)
-    }
-}

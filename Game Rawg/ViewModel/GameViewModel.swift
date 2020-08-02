@@ -31,7 +31,6 @@ class GameViewModel: ObservableObject {
                 self.loading = false
                 self.games.results = games
             }
-            
         }
     }
     
