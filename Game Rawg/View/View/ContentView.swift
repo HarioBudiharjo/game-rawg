@@ -16,17 +16,18 @@ struct ContentView: View {
                     Image(systemName: "house")
                     Text("Home")
             }
+            FavoriteView()
+                .tabItem{
+                    Image(systemName: "heart")
+                    Text("Favorite")
+            }
             AboutView()
                 .tabItem {
                     Image(systemName: "person")
                     Text("About")
             }
+        }.onAppear{
+            SharedPref.checkingFirstLaunch()
         }
-    }
-}
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
     }
 }
