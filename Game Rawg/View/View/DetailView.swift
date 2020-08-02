@@ -12,16 +12,15 @@ struct DetailView: View {
     
     var game : Game
     var gambarIsAvailable : Bool
-    @ObservedObject var imageLoader : ImageLoader
+    @ObservedObject var imageLoader : ImageLoader = ImageLoader()
     @ObservedObject var viewmodel = GameViewModel()
+    @State var like = false
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    let databaseHelper = DatabaseHelper()
     
     init(game:Game) {
         self.game = game
-        imageLoader = ImageLoader(urlString: game.gambar)
         gambarIsAvailable = game.gambar == "Unavailable!" ? false : true
-        if gambarIsAvailable {
-            imageLoader.getDataImage()
-        }
     }
     
     var body: some View {
@@ -73,16 +72,32 @@ struct DetailView: View {
                         Spacer()
                     }
                 }.navigationBarTitle(Text(viewmodel.game.judul), displayMode: .inline)
+                    .navigationBarItems(trailing:
+                        Button(action: {
+                            self.like = !self.like
+                            
+                            if self.like {
+                                self.databaseHelper.create(game: self.game)
+                            } else {
+                                self.databaseHelper.deleteFavorite(id: self.game.id)
+                            }
+                        }, label: {
+                            Image(systemName: like ? "heart.fill" : "heart")
+                                .foregroundColor(.red)
+                        })
+                )
                     .padding()
             }
         }.onAppear{
+            self.imageLoader.setUrl(urlString: self.game.gambar)
+            if self.gambarIsAvailable {
+                self.imageLoader.getDataImage()
+            }
             self.viewmodel.loadDataDetailGame(id: String(self.game.id))
+            if self.databaseHelper.checkingFavorite(id: self.game.id){
+                self.like = true
+            }
+            
         }
-    }
-}
-
-struct DetailView_Previews: PreviewProvider {
-    static var previews: some View {
-        DetailView(game: Game(id: 1, judul: "wew", gambar: "url", tanggalRilis: "18 Juli 1997", peringkat: 9.0))
     }
 }
