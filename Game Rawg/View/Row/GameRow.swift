@@ -9,17 +9,17 @@
 import SwiftUI
 
 struct GameRow: View {
-    
+
     var game: Game
     var gambarIsAvailable : Bool
     var favorite = false
     @ObservedObject var imageLoader : ImageLoader = ImageLoader()
-    
+
     init(game : Game) {
         self.game = game
         gambarIsAvailable = game.gambar == "Unavailable!" ? false : true
     }
-    
+
     var body: some View {
         HStack {
             if gambarIsAvailable {
@@ -41,7 +41,6 @@ struct GameRow: View {
                 Text("Image Empty")
             }
 
-            
             VStack {
                 Spacer()
                 HStack {
@@ -52,18 +51,18 @@ struct GameRow: View {
                     Spacer()
                 }
                 Spacer()
-                HStack{
+                HStack {
                     Text("Release : "+game.tanggalRilis)
                         .font(.system(size: 11, weight: .regular))
                     Spacer()
                 }
-                HStack{
+                HStack {
                     Text("Rate: \(game.peringkat.format())")
                         .font(.system(size: 11, weight: .regular))
                     Spacer()
                 }
             }
-        }.frame(height: 130).onAppear{
+        }.frame(height: 130).onAppear {
             self.imageLoader.setUrl(urlString: self.game.gambar)
             if self.gambarIsAvailable {
                 self.imageLoader.getDataImage()

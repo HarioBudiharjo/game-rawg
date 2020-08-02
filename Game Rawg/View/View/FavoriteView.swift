@@ -14,9 +14,9 @@ struct FavoriteView: View {
     @State var games = [Game]()
     var body: some View {
         NavigationView {
-            VStack{
-                if (games.count>0) {
-                    List(games){ game in
+            VStack {
+                if (!games.isEmpty) {
+                    List(games) { game in
                         NavigationLink(destination: DetailView(game: game)) {
                             GameRow(game: game)
                         }
@@ -26,7 +26,7 @@ struct FavoriteView: View {
                 }
             }
             .navigationBarTitle(Text("Favorite"))
-        }.onAppear{
+        }.onAppear {
             let game = self.databaseHelper.readAllFavorite()
             self.games = game
         }

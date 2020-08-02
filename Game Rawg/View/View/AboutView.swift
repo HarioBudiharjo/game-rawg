@@ -16,15 +16,15 @@ struct AboutView: View {
     @State var githubName = ""
     var body: some View {
         NavigationView {
-            VStack{
+            VStack {
                 Image("hario")
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .frame(width: 250.0, height: 250.0, alignment: .center)
                     .clipShape(Circle())
-                
+
                 Divider()
-                
+
                 if edit {
                     TextField("Nama", text: $nama).textFieldStyle(RoundedBorderTextFieldStyle())
                     TextField("Email", text: $email).textFieldStyle(RoundedBorderTextFieldStyle())
@@ -36,9 +36,7 @@ struct AboutView: View {
                     Button(action: {
                         let urlGithub = self.githubUrl
                         let url: NSURL = URL(string: urlGithub)! as NSURL
-                        
                         UIApplication.shared.open(url as URL)
-                        
                     }) {
                         Text("Github : \(githubName)")
                     }
@@ -46,22 +44,22 @@ struct AboutView: View {
             }
             .navigationBarTitle(Text("Profile"))
             .navigationBarItems(trailing:
-                Button(edit ? "Save" : "Edit"){
+                Button(edit ? "Save" : "Edit") {
                     if self.edit {
                         self.saveData()
                     }
                     self.edit = !self.edit
                 }
             )
-        }.onAppear{
+        }.onAppear {
             self.nama = SharedPref.getName() ?? "Name empty!"
             self.email = SharedPref.getEmail() ?? "Email empty!"
             self.githubUrl = SharedPref.getGithubUrl() ?? "Github url empty!"
             self.githubName = SharedPref.getGithubName() ?? "Github Name empty!"
         }
     }
-    
-    func saveData(){
+
+    func saveData() {
         SharedPref.saveName(name: nama)
         SharedPref.saveEmail(email: email)
         SharedPref.saveGithubUrl(githubUrl: githubUrl)

@@ -9,20 +9,20 @@
 import SwiftUI
 
 struct DetailView: View {
-    
+
     var game : Game
     var gambarIsAvailable : Bool
     @ObservedObject var imageLoader : ImageLoader = ImageLoader()
     @ObservedObject var viewmodel = GameViewModel()
     @State var like = false
-    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext
     let databaseHelper = DatabaseHelper()
-    
+
     init(game:Game) {
         self.game = game
         gambarIsAvailable = game.gambar == "Unavailable!" ? false : true
     }
-    
+
     var body: some View {
         VStack {
             if viewmodel.loading {
@@ -30,7 +30,7 @@ struct DetailView: View {
                 ActivityIndicator(size: 80)
                 Spacer()
             } else {
-                ScrollView{
+                ScrollView {
                     VStack {
                         if gambarIsAvailable {
                             if imageLoader.requestDone {
@@ -49,19 +49,19 @@ struct DetailView: View {
                         } else {
                             Text("Image Empty")
                         }
-                        
+
                         Text(viewmodel.game.judul)
                             .font(.system(size: 16, weight: .bold))
                             .lineLimit(2)
                             .padding(5)
                         Divider()
-                        HStack{
+                        HStack {
                             Text("Rate : "+String(viewmodel.game.peringkat))
                                 .font(.system(size: 10, weight: .regular))
                                 .foregroundColor(.gray)
                             Spacer()
                         }.padding(.bottom,5)
-                        HStack{
+                        HStack {
                             Text("Release : "+viewmodel.game.tanggalRilis)
                                 .font(.system(size: 10, weight: .regular))
                                 .foregroundColor(.gray)
@@ -75,7 +75,7 @@ struct DetailView: View {
                     .navigationBarItems(trailing:
                         Button(action: {
                             self.like = !self.like
-                            
+
                             if self.like {
                                 self.databaseHelper.create(game: self.game)
                             } else {
@@ -88,16 +88,16 @@ struct DetailView: View {
                 )
                     .padding()
             }
-        }.onAppear{
+        }.onAppear {
             self.imageLoader.setUrl(urlString: self.game.gambar)
             if self.gambarIsAvailable {
                 self.imageLoader.getDataImage()
             }
             self.viewmodel.loadDataDetailGame(id: String(self.game.id))
-            if self.databaseHelper.checkingFavorite(id: self.game.id){
+            if self.databaseHelper.checkingFavorite(id: self.game.id) {
                 self.like = true
             }
-            
+
         }
     }
 }

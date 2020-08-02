@@ -16,48 +16,48 @@ class SharedPref {
     static let firstLaunch = "first_launch"
 
     static let preferences = UserDefaults.standard
-    
-    static func saveName(name:String){
+
+    static func saveName(name:String) {
         preferences.set(name, forKey: self.name)
     }
-    
-    static func getName()->String?{
+
+    static func getName() -> String? {
         return preferences.string(forKey: name)
     }
-    
-    static func saveEmail(email:String){
+
+    static func saveEmail(email:String) {
         preferences.set(email, forKey: self.email)
     }
-    
-    static func getEmail()->String?{
+
+    static func getEmail() -> String? {
         return preferences.string(forKey: email)
     }
-    
-    static func saveGithubName(githubName:String){
+
+    static func saveGithubName(githubName:String) {
         preferences.set(githubName, forKey: self.githubName)
     }
-    
-    static func getGithubName()->String?{
+
+    static func getGithubName() -> String? {
         return preferences.string(forKey: githubName)
     }
-    
-    static func saveGithubUrl(githubUrl:String){
+
+    static func saveGithubUrl(githubUrl:String) {
         preferences.set(githubUrl, forKey: self.githubUrl)
     }
-    
-    static func getGithubUrl()->String?{
+
+    static func getGithubUrl() -> String? {
         return preferences.string(forKey: githubUrl)
     }
-    
-    static func saveFirstLaunch(firstLaunch:Bool){
+
+    static func saveFirstLaunch(firstLaunch:Bool) {
         preferences.set(firstLaunch, forKey: self.firstLaunch)
     }
-    
-    static func getFirstLaunch()->Bool{
+
+    static func getFirstLaunch() -> Bool {
         return preferences.bool(forKey: firstLaunch)
     }
-    
-    static func checkingFirstLaunch(){
+
+    static func checkingFirstLaunch() {
         print("first launch \(getFirstLaunch())")
         if getFirstLaunch() == false {
             saveFirstLaunch(firstLaunch: true)

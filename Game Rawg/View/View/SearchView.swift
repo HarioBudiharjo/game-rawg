@@ -9,24 +9,24 @@
 import SwiftUI
 
 struct SearchView: View {
-    
+
     @State private var wasSearch = false
     @State private var searchText = ""
     @State private var showCancelButton: Bool = false
     @ObservedObject var viewmodel = GameViewModel()
-    
+
     var body: some View {
         VStack {
             HStack {
                 HStack {
                     Image(systemName: "magnifyingglass")
-                    TextField("search", text: $searchText, onEditingChanged: { isEditing in
+                    TextField("search", text: $searchText, onEditingChanged: { _ in
                         self.showCancelButton = true
                     }, onCommit: {
                         self.wasSearch = true
                         self.viewmodel.loadDataSearchGame(search: self.searchText)
                     }).foregroundColor(.primary)
-                    
+
                     Button(action: {
                         self.searchText = ""
                     }) {
@@ -37,8 +37,8 @@ struct SearchView: View {
                 .foregroundColor(.secondary)
                 .background(Color(.secondarySystemBackground))
                 .cornerRadius(10.0)
-                
-                if showCancelButton  {
+
+                if showCancelButton {
                     Button("Cancel") {
                         UIApplication.shared.endEditing(true)
                         self.searchText = ""
@@ -49,15 +49,15 @@ struct SearchView: View {
             }
             .padding(.horizontal)
             .navigationBarHidden(showCancelButton)
-            
-            VStack{
+
+            VStack {
                 if viewmodel.loading {
                     Spacer()
                     ActivityIndicator(size: 80)
                     Spacer()
                 } else {
-                    if (viewmodel.games.results.count > 0) {
-                        List(viewmodel.games.results){ game in
+                    if (!viewmodel.games.results.isEmpty) {
+                        List(viewmodel.games.results) { game in
                             NavigationLink(destination: DetailView(game: game)) {
                                 GameRow(game: game)
                             }
@@ -69,10 +69,10 @@ struct SearchView: View {
                     }
                 }
             }
-                
+
             .navigationBarTitle(Text("Search"))
             .resignKeyboardOnDragGesture()
         }.padding(.top,5)
-        
+
     }
 }

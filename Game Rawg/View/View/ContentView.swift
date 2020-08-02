@@ -17,7 +17,7 @@ struct ContentView: View {
                     Text("Home")
             }
             FavoriteView()
-                .tabItem{
+                .tabItem {
                     Image(systemName: "heart")
                     Text("Favorite")
             }
@@ -26,7 +26,7 @@ struct ContentView: View {
                     Image(systemName: "person")
                     Text("About")
             }
-        }.onAppear{
+        }.onAppear {
             SharedPref.checkingFirstLaunch()
         }
     }

@@ -10,7 +10,7 @@ import Foundation
 
 // MARK: - DetailGameResponse
 struct DetailGameResponse: Codable {
-    
+
     let id: Int?
     let name: String?
     let released: String?

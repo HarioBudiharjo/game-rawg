@@ -12,12 +12,12 @@ struct HomeView: View {
     @ObservedObject var viewmodel = GameViewModel()
     var body: some View {
         NavigationView {
-            VStack{
+            VStack {
                 if viewmodel.loading {
                     ActivityIndicator(size: 80)
                 } else {
-                    if (viewmodel.games.results.count > 0) {
-                        List(viewmodel.games.results){ game in
+                    if (!viewmodel.games.results.isEmpty) {
+                        List(viewmodel.games.results) { game in
                             NavigationLink(destination: DetailView(game: game)) {
                                 GameRow(game: game)
                             }
@@ -27,8 +27,8 @@ struct HomeView: View {
                     }
                 }
             }
-            .onAppear{
-                if !(self.viewmodel.games.results.count > 0) {
+            .onAppear {
+                if !(!self.viewmodel.games.results.isEmpty) {
                     self.viewmodel.loadDataListGame()
                 }
             }

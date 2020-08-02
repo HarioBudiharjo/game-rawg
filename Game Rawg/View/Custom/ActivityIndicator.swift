@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct ActivityIndicator: View {
-    
+
     @State private var degress = 0.0
     let size: CGFloat
     var body: some View {
@@ -18,11 +18,11 @@ struct ActivityIndicator: View {
             .stroke(lineWidth: 5.0)
             .frame(width: size, height: size)
             .rotationEffect(Angle(degrees: degress))
-            .onAppear{ self.start()}
+            .onAppear { self.start()}
     }
-    
+
     func start() {
-        Timer.scheduledTimer(withTimeInterval: 0.02, repeats: true) { timer in
+        Timer.scheduledTimer(withTimeInterval: 0.02, repeats: true) { _ in
             withAnimation {
                 self.degress += 10.0
             }
