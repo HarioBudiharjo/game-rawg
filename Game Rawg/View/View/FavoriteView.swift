@@ -24,11 +24,11 @@ struct FavoriteView: View {
                 } else {
                     Text("No games or error!")
                 }
+            }.onAppear {
+                let game = self.databaseHelper.readAllFavorite()
+                self.games = game
             }
             .navigationBarTitle(Text("Favorite"))
-        }.onAppear {
-            let game = self.databaseHelper.readAllFavorite()
-            self.games = game
         }
     }
 }
