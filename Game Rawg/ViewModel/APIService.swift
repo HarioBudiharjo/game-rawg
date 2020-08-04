@@ -17,7 +17,8 @@ protocol ServiceProtocol {
 class APIService : ServiceProtocol {
     private let apiUrlBase = "https://api.rawg.io/api"
     func fetchSearchGame(search: String,completion: @escaping ([Game]?) -> Void) {
-        guard let url = URL(string: "\(apiUrlBase)/games?search=\(search)") else { return }
+        let encodeUrl = search.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? ""
+        guard let url = URL(string: "\(apiUrlBase)/games?search=\(String(describing: encodeUrl))") else { return }
         getData(url: url) { (data) in
             guard let data = data else {
                 completion(nil)
