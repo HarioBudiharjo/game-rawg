@@ -38,6 +38,7 @@ class ImageLoader: ObservableObject {
     }
 
     func imageFromData() -> UIImage {
-        UIImage(data: data!) ?? UIImage()
+        guard let data = data else { return UIImage()}
+        return UIImage(data: data) ?? UIImage()
     }
 }
