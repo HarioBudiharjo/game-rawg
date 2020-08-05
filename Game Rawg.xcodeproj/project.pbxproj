@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		541B9B8824DB182800067122 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541B9B8724DB182800067122 /* ImagePicker.swift */; };
 		543AFEAF24C0C27A0095205B /* ExtensionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543AFEAE24C0C27A0095205B /* ExtensionView.swift */; };
 		543AFEB124C0C2CB0095205B /* ExtensionUIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543AFEB024C0C2CB0095205B /* ExtensionUIApplication.swift */; };
 		543AFEB324C0C3050095205B /* ResignGestureOnDrag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543AFEB224C0C3050095205B /* ResignGestureOnDrag.swift */; };
@@ -39,6 +40,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		541B9B8724DB182800067122 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		543AFEAE24C0C27A0095205B /* ExtensionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionView.swift; sourceTree = "<group>"; };
 		543AFEB024C0C2CB0095205B /* ExtensionUIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIApplication.swift; sourceTree = "<group>"; };
 		543AFEB224C0C3050095205B /* ResignGestureOnDrag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResignGestureOnDrag.swift; sourceTree = "<group>"; };
@@ -99,6 +101,7 @@
 				54B817DE24BA5A8D00111F01 /* Custom */,
 				54B817DD24BA5A8700111F01 /* Row */,
 				54B817DB24BA5A5900111F01 /* View */,
+				541B9B8724DB182800067122 /* ImagePicker.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -324,6 +327,7 @@
 				543AFEB524C0C4FA0095205B /* ExtensionDouble.swift in Sources */,
 				54B817D224BA0E4400111F01 /* ImageLoader.swift in Sources */,
 				543AFEB324C0C3050095205B /* ResignGestureOnDrag.swift in Sources */,
+				541B9B8824DB182800067122 /* ImagePicker.swift in Sources */,
 				54EDBE5624B46DA10034EF8F /* AppDelegate.swift in Sources */,
 				54B817D824BA46A200111F01 /* DetailGameResponse.swift in Sources */,
 				54EDBE6E24B47A130034EF8F /* DetailView.swift in Sources */,

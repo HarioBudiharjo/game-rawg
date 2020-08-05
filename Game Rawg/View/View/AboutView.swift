@@ -14,10 +14,13 @@ struct AboutView: View {
     @State var email = ""
     @State var githubUrl = ""
     @State var githubName = ""
+    @State var isShowPicker: Bool = false
+    @State var image: Image? = Image("hario")
+    @State var data: Data? = UIImage(named: "hario")?.pngData()
     var body: some View {
         NavigationView {
             VStack {
-                Image("hario")
+                image?
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .frame(width: 250.0, height: 250.0, alignment: .center)
@@ -26,6 +29,9 @@ struct AboutView: View {
                 Divider()
 
                 if edit {
+                    Button("Change Photo") {
+                        self.isShowPicker.toggle()
+                    }
                     TextField("Nama", text: $nama).textFieldStyle(RoundedBorderTextFieldStyle())
                     TextField("Email", text: $email).textFieldStyle(RoundedBorderTextFieldStyle())
                     TextField("Github Url", text: $githubUrl).textFieldStyle(RoundedBorderTextFieldStyle())
@@ -42,6 +48,9 @@ struct AboutView: View {
                     }
                 }
             }
+            .sheet(isPresented: $isShowPicker) {
+                ImagePicker(image: self.$image, data: self.$data)
+            }
             .navigationBarTitle(Text("Profile"))
             .navigationBarItems(trailing:
                 Button(edit ? "Save" : "Edit") {
@@ -50,16 +59,20 @@ struct AboutView: View {
                     }
                     self.edit = !self.edit
                 }
-            )
-        }.onAppear {
-            self.nama = SharedPref.getName() ?? "Name empty!"
-            self.email = SharedPref.getEmail() ?? "Email empty!"
-            self.githubUrl = SharedPref.getGithubUrl() ?? "Github url empty!"
-            self.githubName = SharedPref.getGithubName() ?? "Github Name empty!"
+            ).onAppear {
+                self.edit = false
+                self.nama = SharedPref.getName() ?? "Name empty!"
+                self.email = SharedPref.getEmail() ?? "Email empty!"
+                self.githubUrl = SharedPref.getGithubUrl() ?? "Github url empty!"
+                self.githubName = SharedPref.getGithubName() ?? "Github Name empty!"
+                let uiImage = UIImage(data: SharedPref.getPhoto())
+                self.image = Image(uiImage: uiImage!)
+            }
         }
     }
 
     func saveData() {
+        SharedPref.savePhoto(photo: data!)
         SharedPref.saveName(name: nama)
         SharedPref.saveEmail(email: email)
         SharedPref.saveGithubUrl(githubUrl: githubUrl)
