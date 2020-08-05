@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 class SharedPref {
     static let name = "name"
@@ -14,6 +15,7 @@ class SharedPref {
     static let githubName = "github_name"
     static let githubUrl = "github_url"
     static let firstLaunch = "first_launch"
+    static let photo = "photo"
 
     static let preferences = UserDefaults.standard
 
@@ -55,6 +57,15 @@ class SharedPref {
 
     static func getFirstLaunch() -> Bool {
         return preferences.bool(forKey: firstLaunch)
+    }
+
+    static func savePhoto(photo:Data) {
+        preferences.set(photo, forKey: self.photo)
+    }
+
+    static func getPhoto() -> Data {
+        let defaultPhoto = UIImage(named: "hario")?.pngData()
+        return preferences.data(forKey: photo) ?? defaultPhoto!
     }
 
     static func checkingFirstLaunch() {
