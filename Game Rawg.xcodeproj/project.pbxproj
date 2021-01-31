@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		00F072E925B310A40036ED90 /* Cleanse in Frameworks */ = {isa = PBXBuildFile; productRef = 00F072E825B310A40036ED90 /* Cleanse */; };
 		541B9B8824DB182800067122 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541B9B8724DB182800067122 /* ImagePicker.swift */; };
 		543AFEAF24C0C27A0095205B /* ExtensionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543AFEAE24C0C27A0095205B /* ExtensionView.swift */; };
 		543AFEB124C0C2CB0095205B /* ExtensionUIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543AFEB024C0C2CB0095205B /* ExtensionUIApplication.swift */; };
@@ -79,6 +80,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				00F072E925B310A40036ED90 /* Cleanse in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -245,6 +247,7 @@
 			);
 			name = "Game Rawg";
 			packageProductDependencies = (
+				00F072E825B310A40036ED90 /* Cleanse */,
 			);
 			productName = "Game Rawg";
 			productReference = 54EDBE5224B46DA10034EF8F /* Game Rawg.app */;
@@ -257,7 +260,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1150;
-				LastUpgradeCheck = 1150;
+				LastUpgradeCheck = 1230;
 				ORGANIZATIONNAME = "Hario Budiharjo";
 				TargetAttributes = {
 					54EDBE5124B46DA10034EF8F = {
@@ -275,6 +278,7 @@
 			);
 			mainGroup = 54EDBE4924B46DA00034EF8F;
 			packageReferences = (
+				00F072E725B310A40036ED90 /* XCRemoteSwiftPackageReference "Cleanse" */,
 			);
 			productRefGroup = 54EDBE5324B46DA10034EF8F /* Products */;
 			projectDirPath = "";
@@ -394,6 +398,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -454,6 +459,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -542,6 +548,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		00F072E725B310A40036ED90 /* XCRemoteSwiftPackageReference "Cleanse" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/square/Cleanse.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.2.6;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		00F072E825B310A40036ED90 /* Cleanse */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 00F072E725B310A40036ED90 /* XCRemoteSwiftPackageReference "Cleanse" */;
+			productName = Cleanse;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		54740CAA24D3640800184343 /* Favorite.xcdatamodeld */ = {
