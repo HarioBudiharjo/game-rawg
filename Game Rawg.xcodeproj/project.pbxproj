@@ -87,14 +87,68 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		543AFEAD24C0C25A0095205B /* Extension */ = {
+		003E5B5925D8F642001C6C14 /* UseCase */ = {
 			isa = PBXGroup;
 			children = (
-				543AFEAE24C0C27A0095205B /* ExtensionView.swift */,
-				543AFEB024C0C2CB0095205B /* ExtensionUIApplication.swift */,
+			);
+			path = UseCase;
+			sourceTree = "<group>";
+		};
+		003E5B5E25D8F900001C6C14 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
 				543AFEB424C0C4FA0095205B /* ExtensionDouble.swift */,
+				543AFEB024C0C2CB0095205B /* ExtensionUIApplication.swift */,
+				543AFEAE24C0C27A0095205B /* ExtensionView.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		00F2440E25C732C90013C2D6 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				54EDBE6024B46DA60034EF8F /* LaunchScreen.storyboard */,
+				54EDBE5B24B46DA60034EF8F /* Assets.xcassets */,
+				54740CAA24D3640800184343 /* Favorite.xcdatamodeld */,
+				54EDBE6324B46DA60034EF8F /* Info.plist */,
+				54EDBE5724B46DA10034EF8F /* SceneDelegate.swift */,
+				54EDBE5524B46DA10034EF8F /* AppDelegate.swift */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		00F2440F25C736950013C2D6 /* External */ = {
+			isa = PBXGroup;
+			children = (
+				003E5B5E25D8F900001C6C14 /* Extension */,
+				54B817D024BA0E2C00111F01 /* Util */,
+			);
+			path = External;
+			sourceTree = "<group>";
+		};
+		00F2441025C736A20013C2D6 /* DI */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = DI;
+			sourceTree = "<group>";
+		};
+		00F2441125C736A70013C2D6 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				5442EFC424B481E90003C029 /* Model */,
+				003E5B5925D8F642001C6C14 /* UseCase */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		00F2441225C736B50013C2D6 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				5442EFC524B481F30003C029 /* ViewModel */,
+				5442EFC324B481E30003C029 /* View */,
+			);
+			path = Presentation;
 			sourceTree = "<group>";
 		};
 		5442EFC324B481E30003C029 /* View */ = {
@@ -185,17 +239,11 @@
 		54EDBE5424B46DA10034EF8F /* Game Rawg */ = {
 			isa = PBXGroup;
 			children = (
-				54740CAA24D3640800184343 /* Favorite.xcdatamodeld */,
-				543AFEAD24C0C25A0095205B /* Extension */,
-				54B817D024BA0E2C00111F01 /* Util */,
-				5442EFC524B481F30003C029 /* ViewModel */,
-				5442EFC424B481E90003C029 /* Model */,
-				5442EFC324B481E30003C029 /* View */,
-				54EDBE5524B46DA10034EF8F /* AppDelegate.swift */,
-				54EDBE5724B46DA10034EF8F /* SceneDelegate.swift */,
-				54EDBE5B24B46DA60034EF8F /* Assets.xcassets */,
-				54EDBE6024B46DA60034EF8F /* LaunchScreen.storyboard */,
-				54EDBE6324B46DA60034EF8F /* Info.plist */,
+				00F2441225C736B50013C2D6 /* Presentation */,
+				00F2441125C736A70013C2D6 /* Domain */,
+				00F2441025C736A20013C2D6 /* DI */,
+				00F2440F25C736950013C2D6 /* External */,
+				00F2440E25C732C90013C2D6 /* Supporting Files */,
 				54EDBE5D24B46DA60034EF8F /* Preview Content */,
 			);
 			path = "Game Rawg";
@@ -495,7 +543,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Game Rawg/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = "Game Rawg/Info.plist";
+				INFOPLIST_FILE = "Game Rawg/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -514,7 +562,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Game Rawg/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = "Game Rawg/Info.plist";
+				INFOPLIST_FILE = "Game Rawg/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
