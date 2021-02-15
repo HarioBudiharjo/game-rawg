@@ -13,7 +13,7 @@ struct DetailView: View {
     var game : Game
     var gambarIsAvailable : Bool
     @ObservedObject var imageLoader : ImageLoader = ImageLoader()
-    @ObservedObject var viewmodel = GameViewModel()
+    @ObservedObject var viewmodel = GameViewModel(service: Injection.provideGameUseCase())
     @State var like = false
     let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext
     let databaseHelper = DatabaseHelper()

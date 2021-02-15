@@ -8,13 +8,13 @@
 
 import Foundation
 
-protocol ServiceProtocol {
+protocol GameUseCase {
     func fetchListGame(completion: @escaping ([Game]?) -> Void)
     func fetchDetailGame(id: String,completion: @escaping (GameDetail?) -> Void)
     func fetchSearchGame(search: String,completion: @escaping ([Game]?) -> Void)
 }
 
-class APIService : ServiceProtocol {
+class GameUseCaseImpl : GameUseCase {
     private let apiUrlBase = "https://api.rawg.io/api"
     func fetchSearchGame(search: String,completion: @escaping ([Game]?) -> Void) {
         let encodeUrl = search.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? ""

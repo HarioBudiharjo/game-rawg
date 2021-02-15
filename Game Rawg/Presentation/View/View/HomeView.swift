@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct HomeView: View {
-    @ObservedObject var viewmodel = GameViewModel()
+    @ObservedObject var viewmodel : GameViewModel = GameViewModel(service: Injection.provideGameUseCase())
     var body: some View {
         NavigationView {
             VStack {

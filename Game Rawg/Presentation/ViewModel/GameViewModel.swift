@@ -20,8 +20,8 @@ class GameViewModel: ObservableObject {
         tanggalRilis: "",
         peringkat: 0.0)
 
-    let service: ServiceProtocol
-    init(service: ServiceProtocol = APIService()) {
+    let service: GameUseCase
+    init(service: GameUseCase) {
         self.service = service
     }
 
