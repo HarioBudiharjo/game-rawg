@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0091E43D25DC233D00C1ADFC /* GameRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0091E43C25DC233D00C1ADFC /* GameRepository.swift */; };
 		00DC85C925DAC6E900ED6E16 /* Injection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DC85C825DAC6E900ED6E16 /* Injection.swift */; };
 		541B9B8824DB182800067122 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541B9B8724DB182800067122 /* ImagePicker.swift */; };
 		543AFEAF24C0C27A0095205B /* ExtensionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543AFEAE24C0C27A0095205B /* ExtensionView.swift */; };
@@ -41,6 +42,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0091E43C25DC233D00C1ADFC /* GameRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameRepository.swift; sourceTree = "<group>"; };
 		00DC85C825DAC6E900ED6E16 /* Injection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Injection.swift; sourceTree = "<group>"; };
 		541B9B8724DB182800067122 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		543AFEAE24C0C27A0095205B /* ExtensionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionView.swift; sourceTree = "<group>"; };
@@ -103,6 +105,22 @@
 				543AFEAE24C0C27A0095205B /* ExtensionView.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		0091E43A25DC231F00C1ADFC /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				0091E43B25DC232400C1ADFC /* Repository */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		0091E43B25DC232400C1ADFC /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				0091E43C25DC233D00C1ADFC /* GameRepository.swift */,
+			);
+			path = Repository;
 			sourceTree = "<group>";
 		};
 		00F2440E25C732C90013C2D6 /* Supporting Files */ = {
@@ -240,6 +258,7 @@
 		54EDBE5424B46DA10034EF8F /* Game Rawg */ = {
 			isa = PBXGroup;
 			children = (
+				0091E43A25DC231F00C1ADFC /* Data */,
 				00F2441225C736B50013C2D6 /* Presentation */,
 				00F2441125C736A70013C2D6 /* Domain */,
 				00F2441025C736A20013C2D6 /* DI */,
@@ -376,6 +395,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0091E43D25DC233D00C1ADFC /* GameRepository.swift in Sources */,
 				543AFEB524C0C4FA0095205B /* ExtensionDouble.swift in Sources */,
 				54B817D224BA0E4400111F01 /* ImageLoader.swift in Sources */,
 				543AFEB324C0C3050095205B /* ResignGestureOnDrag.swift in Sources */,

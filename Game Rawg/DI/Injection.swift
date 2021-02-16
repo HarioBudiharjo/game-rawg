@@ -10,7 +10,12 @@ import Foundation
 
 final class Injection: NSObject {
     static func provideGameUseCase() -> GameUseCase {
-        let gameUseCase = GameUseCaseImpl()
+        let gameUseCase = GameUseCaseImpl(repository: Injection.provideGameRepository())
         return gameUseCase
+    }
+
+    static func provideGameRepository() -> GameRepository {
+        let gameRepository = GameRepositoryImpl()
+        return gameRepository
     }
 }
