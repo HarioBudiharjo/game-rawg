@@ -53,12 +53,12 @@ struct GameRow: View {
                 Spacer()
                 HStack {
                     Text("Release : "+game.tanggalRilis)
-                        .font(.system(size: 11, weight: .regular))
+                        .font(.system(size: 14, weight: .regular))
                     Spacer()
                 }
                 HStack {
                     Text("Rate: \(game.peringkat.format())")
-                        .font(.system(size: 11, weight: .regular))
+                        .font(.system(size: 14, weight: .regular))
                     Spacer()
                 }
             }
