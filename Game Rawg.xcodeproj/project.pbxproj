@@ -118,6 +118,7 @@
 		0091E43B25DC232400C1ADFC /* Repository */ = {
 			isa = PBXGroup;
 			children = (
+				54F3BEBC24B5D2EA00A227A8 /* Response */,
 				0091E43C25DC233D00C1ADFC /* GameRepository.swift */,
 			);
 			path = Repository;
@@ -186,7 +187,6 @@
 			isa = PBXGroup;
 			children = (
 				54F3BEBD24B5D2F100A227A8 /* UI */,
-				54F3BEBC24B5D2EA00A227A8 /* Response */,
 			);
 			path = Model;
 			sourceTree = "<group>";
