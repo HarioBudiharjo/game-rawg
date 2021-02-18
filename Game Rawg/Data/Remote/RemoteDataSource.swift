@@ -7,58 +7,83 @@
 //
 
 import Foundation
+import Combine
 
 protocol RemoteDataSource {
-    func fetchSearchGame(search: String, completion: @escaping (SearchGameResponse?) -> Void)
-
-    func fetchListGame(completion: @escaping (ListGameResponse?) -> Void)
-
-    func fetchDetailGame(id: String, completion: @escaping (DetailGameResponse?) -> Void)
+    func fetchSearchGame(search: String) -> AnyPublisher<[SearchGameResponse.Result], Error>
+    func fetchListGame() -> AnyPublisher<[ListGameResponse.Result], Error>
+    func fetchDetailGame(id: String) -> AnyPublisher<DetailGameResponse, Error>
 }
 
 class RemoteDataSourceImpl: RemoteDataSource {
     private let apiUrlBase = "https://api.rawg.io/api"
-    func fetchSearchGame(search: String,completion: @escaping (SearchGameResponse?) -> Void) {
-        let encodeUrl = search.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? ""
-        guard let url = URL(string: "\(apiUrlBase)/games?search=\(String(describing: encodeUrl))") else { return }
-        getData(url: url) { (data) in
-            guard let data = data else {
-                completion(nil)
+    func fetchSearchGame(search: String) -> AnyPublisher<[SearchGameResponse.Result], Error> {
+        return Future<[SearchGameResponse.Result], Error> { completion in
+            let encodeUrl = search.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? ""
+            guard let url = URL(string: "\(self.apiUrlBase)/games?search=\(String(describing: encodeUrl))") else {
+                completion(.failure(RemoteError.urlNotValid))
                 return
             }
-            let game = try? JSONDecoder().decode(SearchGameResponse.self, from: data)
-            completion(game)
-        }
+            self.getData(url: url) { (data) in
+                guard let data = data else {
+                    completion(.failure(RemoteError.dataEmpty))
+                    return
+                }
+                guard let game = try? JSONDecoder().decode(SearchGameResponse.self, from: data) else {
+                    completion(.failure(RemoteError.failedJsonDecode))
+                    return
+                }
+                guard let result = game.results else {
+                    completion(.failure(RemoteError.failedJsonDecode))
+                    return
+                }
+                completion(.success(result))
+            }
+        }.eraseToAnyPublisher()
     }
 
-    func fetchListGame(completion: @escaping (ListGameResponse?) -> Void) {
-        guard let url = URL(string: "\(apiUrlBase)/games") else { return }
-        getData(url: url) { (data) in
-            guard let data = data else {
-                completion(nil)
+    func fetchListGame() -> AnyPublisher<[ListGameResponse.Result], Error> {
+        return Future<[ListGameResponse.Result], Error> { completion in
+            guard let url = URL(string: "\(self.apiUrlBase)/games") else {
+                completion(.failure(RemoteError.urlNotValid))
                 return
             }
-            guard let game = try? JSONDecoder().decode(ListGameResponse.self, from: data) else {
-                completion(nil)
-                return
+            self.getData(url: url) { (data) in
+                guard let data = data else {
+                    completion(.failure(RemoteError.dataEmpty))
+                    return
+                }
+                guard let game = try? JSONDecoder().decode(ListGameResponse.self, from: data) else {
+                    completion(.failure(RemoteError.failedJsonDecode))
+                    return
+                }
+                guard let result = game.results else {
+                    completion(.failure(RemoteError.failedJsonDecode))
+                    return
+                }
+                completion(.success(result))
             }
-            completion(game)
-        }
+        }.eraseToAnyPublisher()
     }
 
-    func fetchDetailGame(id: String,completion: @escaping (DetailGameResponse?) -> Void) {
-        guard let url = URL(string: "\(apiUrlBase)/games/\(id)") else { return }
-        getData(url: url) { (data) in
-            guard let data = data else {
-                completion(nil)
+    func fetchDetailGame(id: String) -> AnyPublisher<DetailGameResponse, Error> {
+        return Future<DetailGameResponse, Error> { completion in
+            guard let url = URL(string: "\(self.apiUrlBase)/games/\(id)") else {
+                completion(.failure(RemoteError.urlNotValid))
                 return
             }
-            guard let game = try? JSONDecoder().decode(DetailGameResponse.self, from: data) else {
-                completion(nil)
-                return
+            self.getData(url: url) { (data) in
+                guard let data = data else {
+                    completion(.failure(RemoteError.dataEmpty))
+                    return
+                }
+                guard let game = try? JSONDecoder().decode(DetailGameResponse.self, from: data) else {
+                    completion(.failure(RemoteError.failedJsonDecode))
+                    return
+                }
+                completion(.success(game))
             }
-            completion(game)
-        }
+        }.eraseToAnyPublisher()
     }
 
     func getData(url:URL,completion: @escaping (Data?) -> Void) {

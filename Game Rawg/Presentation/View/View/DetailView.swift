@@ -13,8 +13,7 @@ struct DetailView: View {
     var game : Game
     var gambarIsAvailable : Bool
     @ObservedObject var imageLoader : ImageLoader = ImageLoader()
-    @ObservedObject var viewmodel = GameViewModel(service: Injection.provideGameUseCase())
-    @State var like = false
+    @ObservedObject var viewmodel = GameViewModel(useCase: Injection.provideGameUseCase())
     let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext
     let repository = Injection.provideGameRepository()
 
@@ -74,15 +73,15 @@ struct DetailView: View {
                 }.navigationBarTitle(Text(viewmodel.game.name), displayMode: .inline)
                     .navigationBarItems(trailing:
                         Button(action: {
-                            self.like = !self.like
+                            self.viewmodel.isFavorite = !self.viewmodel.isFavorite
 
-                            if self.like {
-                                self.repository.create(game: self.game)
+                            if self.viewmodel.isFavorite {
+                                self.viewmodel.createFavorite(game: self.game)
                             } else {
-                                self.repository.deleteFavorite(id: self.game.id)
+                                self.viewmodel.deleteFavorite(id: self.game.id)
                             }
                         }, label: {
-                            Image(systemName: like ? "heart.fill" : "heart")
+                            Image(systemName: self.viewmodel.isFavorite ? "heart.fill" : "heart")
                                 .foregroundColor(.red)
                         })
                 )
@@ -94,9 +93,7 @@ struct DetailView: View {
                 self.imageLoader.getDataImage()
             }
             self.viewmodel.loadDataDetailGame(id: String(self.game.id))
-            if self.repository.checkingFavorite(id: self.game.id) {
-                self.like = true
-            }
+            self.viewmodel.isFavorite(id: self.game.id)
 
         }
     }

@@ -7,11 +7,17 @@
 //
 
 import Foundation
+import Combine
 
 protocol GameUseCase {
-    func fetchListGame(completion: @escaping ([Game]?) -> Void)
-    func fetchDetailGame(id: String,completion: @escaping (GameDetail?) -> Void)
-    func fetchSearchGame(search: String,completion: @escaping ([Game]?) -> Void)
+    func fetchListGame() -> AnyPublisher<[Game], Error>
+    func fetchDetailGame(id: String) -> AnyPublisher<GameDetail, Error>
+    func fetchSearchGame(search: String) -> AnyPublisher<[Game], Error>
+
+    func isFavorite(id: Int) -> AnyPublisher<Bool, Error>
+    func readAllFavorite() -> AnyPublisher<[Game], Error>
+    func deleteFavorite(id: Int) -> AnyPublisher<Bool, Error>
+    func create(game: Game) -> AnyPublisher<Bool, Error>
 }
 
 class GameUseCaseImpl : GameUseCase {
@@ -22,21 +28,31 @@ class GameUseCaseImpl : GameUseCase {
         self.repository = repository
     }
 
-    func fetchSearchGame(search: String,completion: @escaping ([Game]?) -> Void) {
-        return self.repository.fetchSearchGame(search: search) { (game) in
-            completion(game)
-        }
+    func fetchSearchGame(search: String) -> AnyPublisher<[Game], Error> {
+        return self.repository.fetchSearchGame(search: search)
     }
 
-    func fetchListGame(completion: @escaping ([Game]?) -> Void) {
-        return self.repository.fetchListGame { (game) in
-            completion(game)
-        }
+    func fetchListGame() -> AnyPublisher<[Game], Error> {
+        return self.repository.fetchListGame()
     }
 
-    func fetchDetailGame(id: String,completion: @escaping (GameDetail?) -> Void) {
-        return self.repository.fetchDetailGame(id: id) { (game) in
-            completion(game)
-        }
+    func fetchDetailGame(id: String) -> AnyPublisher<GameDetail, Error> {
+        return self.repository.fetchDetailGame(id: id)
+    }
+
+    func isFavorite(id: Int) -> AnyPublisher<Bool, Error> {
+        return self.repository.checkingFavorite(id: id)
+    }
+
+    func readAllFavorite() -> AnyPublisher<[Game], Error> {
+        return self.repository.readAllFavorite()
+    }
+
+    func deleteFavorite(id: Int) -> AnyPublisher<Bool, Error> {
+        return self.repository.deleteFavorite(id: id)
+    }
+
+    func create(game: Game) -> AnyPublisher<Bool, Error> {
+        return self.repository.create(game: game)
     }
 }

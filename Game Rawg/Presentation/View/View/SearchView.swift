@@ -13,7 +13,7 @@ struct SearchView: View {
     @State private var wasSearch = false
     @State private var searchText = ""
     @State private var showCancelButton: Bool = false
-    @ObservedObject var viewmodel = GameViewModel(service: Injection.provideGameUseCase())
+    @ObservedObject var viewmodel = GameViewModel(useCase: Injection.provideGameUseCase())
 
     var body: some View {
         VStack {

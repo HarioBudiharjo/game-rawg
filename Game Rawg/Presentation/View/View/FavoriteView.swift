@@ -10,13 +10,12 @@ import SwiftUI
 import CoreData
 
 struct FavoriteView: View {
-    let repository = Injection.provideGameRepository()
-    @State var games = [Game]()
+    @ObservedObject var viewmodel = GameViewModel(useCase: Injection.provideGameUseCase())
     var body: some View {
         NavigationView {
             VStack {
-                if (!games.isEmpty) {
-                    List(games) { game in
+                if (!viewmodel.games.results.isEmpty) {
+                    List(viewmodel.games.results) { game in
                         NavigationLink(destination: DetailView(game: game)) {
                             GameRow(game: game)
                         }
@@ -25,8 +24,7 @@ struct FavoriteView: View {
                     Text("No games or error!")
                 }
             }.onAppear {
-                let game = self.repository.readAllFavorite()
-                self.games = game
+                self.viewmodel.readAllFavorite()
             }
             .navigationBarTitle(Text("Favorite"))
         }

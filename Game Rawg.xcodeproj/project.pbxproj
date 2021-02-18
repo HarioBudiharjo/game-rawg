@@ -10,6 +10,8 @@
 		003DA35F25DE229500F88AA4 /* RemoteDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003DA35E25DE229500F88AA4 /* RemoteDataSource.swift */; };
 		005827E325DE2C29007BCAEF /* LocaleDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005827E225DE2C29007BCAEF /* LocaleDataSource.swift */; };
 		005827E925DE7D55007BCAEF /* GameEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005827E825DE7D55007BCAEF /* GameEntity.swift */; };
+		005827ED25DE952F007BCAEF /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005827EC25DE952F007BCAEF /* Error.swift */; };
+		005827F125DEA63F007BCAEF /* ObjectMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005827F025DEA63F007BCAEF /* ObjectMapper.swift */; };
 		0091E43D25DC233D00C1ADFC /* GameRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0091E43C25DC233D00C1ADFC /* GameRepository.swift */; };
 		00DC85C925DAC6E900ED6E16 /* Injection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DC85C825DAC6E900ED6E16 /* Injection.swift */; };
 		541B9B8824DB182800067122 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541B9B8724DB182800067122 /* ImagePicker.swift */; };
@@ -47,6 +49,8 @@
 		003DA35E25DE229500F88AA4 /* RemoteDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteDataSource.swift; sourceTree = "<group>"; };
 		005827E225DE2C29007BCAEF /* LocaleDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocaleDataSource.swift; sourceTree = "<group>"; };
 		005827E825DE7D55007BCAEF /* GameEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEntity.swift; sourceTree = "<group>"; };
+		005827EC25DE952F007BCAEF /* Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
+		005827F025DEA63F007BCAEF /* ObjectMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectMapper.swift; sourceTree = "<group>"; };
 		0091E43C25DC233D00C1ADFC /* GameRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameRepository.swift; sourceTree = "<group>"; };
 		00DC85C825DAC6E900ED6E16 /* Injection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Injection.swift; sourceTree = "<group>"; };
 		541B9B8724DB182800067122 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
@@ -235,6 +239,8 @@
 			children = (
 				54B817D124BA0E4400111F01 /* ImageLoader.swift */,
 				54740CA824D35C8600184343 /* SharedPref.swift */,
+				005827EC25DE952F007BCAEF /* Error.swift */,
+				005827F025DEA63F007BCAEF /* ObjectMapper.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -289,8 +295,8 @@
 			isa = PBXGroup;
 			children = (
 				0091E43A25DC231F00C1ADFC /* Data */,
-				00F2441225C736B50013C2D6 /* Presentation */,
 				00F2441125C736A70013C2D6 /* Domain */,
+				00F2441225C736B50013C2D6 /* Presentation */,
 				00F2441025C736A20013C2D6 /* DI */,
 				00F2440F25C736950013C2D6 /* External */,
 				00F2440E25C732C90013C2D6 /* Supporting Files */,
@@ -431,6 +437,7 @@
 				541B9B8824DB182800067122 /* ImagePicker.swift in Sources */,
 				54EDBE5624B46DA10034EF8F /* AppDelegate.swift in Sources */,
 				54B817D824BA46A200111F01 /* DetailGameResponse.swift in Sources */,
+				005827F125DEA63F007BCAEF /* ObjectMapper.swift in Sources */,
 				54EDBE6E24B47A130034EF8F /* DetailView.swift in Sources */,
 				5442EFCB24B482B30003C029 /* GameRow.swift in Sources */,
 				54B817D424BA330700111F01 /* GameDetail.swift in Sources */,
@@ -440,6 +447,7 @@
 				54EDBE6A24B479F00034EF8F /* HomeView.swift in Sources */,
 				005827E925DE7D55007BCAEF /* GameEntity.swift in Sources */,
 				54EDBE5824B46DA10034EF8F /* SceneDelegate.swift in Sources */,
+				005827ED25DE952F007BCAEF /* Error.swift in Sources */,
 				003DA35F25DE229500F88AA4 /* RemoteDataSource.swift in Sources */,
 				54EDBE5A24B46DA10034EF8F /* ContentView.swift in Sources */,
 				54740CAC24D3640800184343 /* Favorite.xcdatamodeld in Sources */,
