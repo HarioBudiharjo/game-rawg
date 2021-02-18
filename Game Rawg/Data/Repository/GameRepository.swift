@@ -33,10 +33,10 @@ class GameRepositoryImpl: GameRepository {
             game.results?.forEach({ (result) in
                 games.append(Game(
                     id: result.id ?? 0,
-                    judul: result.name ?? "Unknnown",
-                    gambar: result.backgroundImage ?? "Unavailable!",
-                    tanggalRilis: result.released ?? "Undefine",
-                    peringkat: Double(result.rating ?? 0)))
+                    name: result.name ?? "Unknnown",
+                    image: result.backgroundImage ?? "Unavailable!",
+                    release: result.released ?? "Undefine",
+                    rating: Double(result.rating ?? 0)))
             })
             DispatchQueue.main.async {
                 completion(games)
@@ -60,10 +60,10 @@ class GameRepositoryImpl: GameRepository {
             game.results?.forEach({ (result) in
                 games.append(Game(
                     id: result.id ?? 0,
-                    judul: result.name ?? "",
-                    gambar: result.backgroundImage ?? "",
-                    tanggalRilis: result.released ?? "",
-                    peringkat: result.rating ?? 0.0))
+                    name: result.name ?? "",
+                    image: result.backgroundImage ?? "",
+                    release: result.released ?? "",
+                    rating: result.rating ?? 0.0))
             })
             DispatchQueue.main.async {
                 completion(games)
@@ -85,11 +85,11 @@ class GameRepositoryImpl: GameRepository {
 
             let detailGame = GameDetail(
                 id: game.id ?? 0 ,
-                judul: game.name ?? "",
-                deskripsi: game.descriptionRaw ?? "",
-                gambar: game.backgroundImage ?? "",
-                tanggalRilis: game.released ?? "",
-                peringkat: game.rating ?? 0.0)
+                name: game.name ?? "",
+                description: game.descriptionRaw ?? "",
+                image: game.backgroundImage ?? "",
+                release: game.released ?? "",
+                rating: game.rating ?? 0.0)
 
             DispatchQueue.main.async {
                 completion(detailGame)

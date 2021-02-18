@@ -17,7 +17,7 @@ struct GameRow: View {
 
     init(game : Game) {
         self.game = game
-        gambarIsAvailable = game.gambar == "Unavailable!" ? false : true
+        gambarIsAvailable = game.image == "Unavailable!" ? false : true
     }
 
     var body: some View {
@@ -44,7 +44,7 @@ struct GameRow: View {
             VStack {
                 Spacer()
                 HStack {
-                    Text(game.judul)
+                    Text(game.name)
                         .font(.system(size: 16, weight: .bold))
                         .lineLimit(2)
                         .padding(5)
@@ -52,18 +52,18 @@ struct GameRow: View {
                 }
                 Spacer()
                 HStack {
-                    Text("Release : "+game.tanggalRilis)
+                    Text("Release : "+game.release)
                         .font(.system(size: 14, weight: .regular))
                     Spacer()
                 }
                 HStack {
-                    Text("Rate: \(game.peringkat.format())")
+                    Text("Rate: \(game.rating.format())")
                         .font(.system(size: 14, weight: .regular))
                     Spacer()
                 }
             }
         }.frame(height: 130).onAppear {
-            self.imageLoader.setUrl(urlString: self.game.gambar)
+            self.imageLoader.setUrl(urlString: self.game.image)
             if self.gambarIsAvailable {
                 self.imageLoader.getDataImage()
             }

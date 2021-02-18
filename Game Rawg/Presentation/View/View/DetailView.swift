@@ -20,7 +20,7 @@ struct DetailView: View {
 
     init(game:Game) {
         self.game = game
-        gambarIsAvailable = game.gambar == "Unavailable!" ? false : true
+        gambarIsAvailable = game.image == "Unavailable!" ? false : true
     }
 
     var body: some View {
@@ -50,28 +50,28 @@ struct DetailView: View {
                             Text("Image Empty")
                         }
 
-                        Text(viewmodel.game.judul)
+                        Text(viewmodel.game.name)
                             .font(.system(size: 16, weight: .bold))
                             .lineLimit(2)
                             .padding(5)
                         Divider()
                         HStack {
-                            Text("Rate : "+String(viewmodel.game.peringkat))
+                            Text("Rate : "+String(viewmodel.game.rating))
                                 .font(.system(size: 10, weight: .regular))
                                 .foregroundColor(.gray)
                             Spacer()
                         }.padding(.bottom,5)
                         HStack {
-                            Text("Release : "+viewmodel.game.tanggalRilis)
+                            Text("Release : "+viewmodel.game.release)
                                 .font(.system(size: 10, weight: .regular))
                                 .foregroundColor(.gray)
                             Spacer()
                         }.padding(.bottom,5)
                         Divider()
-                        Text(viewmodel.game.deskripsi)
+                        Text(viewmodel.game.description)
                         Spacer()
                     }
-                }.navigationBarTitle(Text(viewmodel.game.judul), displayMode: .inline)
+                }.navigationBarTitle(Text(viewmodel.game.name), displayMode: .inline)
                     .navigationBarItems(trailing:
                         Button(action: {
                             self.like = !self.like
@@ -89,7 +89,7 @@ struct DetailView: View {
                     .padding()
             }
         }.onAppear {
-            self.imageLoader.setUrl(urlString: self.game.gambar)
+            self.imageLoader.setUrl(urlString: self.game.image)
             if self.gambarIsAvailable {
                 self.imageLoader.getDataImage()
             }

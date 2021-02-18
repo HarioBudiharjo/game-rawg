@@ -14,11 +14,11 @@ class GameViewModel: ObservableObject {
     @Published var loading = false
     @Published var game = GameDetail(
         id: 0,
-        judul: "",
-        deskripsi: "",
-        gambar: "",
-        tanggalRilis: "",
-        peringkat: 0.0)
+        name: "",
+        description: "",
+        image: "",
+        release: "",
+        rating: 0.0)
 
     let service: GameUseCase
     init(service: GameUseCase) {

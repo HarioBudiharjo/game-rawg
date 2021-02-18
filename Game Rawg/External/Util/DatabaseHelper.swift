@@ -24,10 +24,10 @@ class DatabaseHelper {
             result?.forEach { game in
                 games.append(Game(
                     id: game.value(forKey: "id") as? Int ?? 0,
-                    judul: game.value(forKey: "judul") as? String ?? "Unknown!",
-                    gambar: game.value(forKey: "gambar") as? String ?? "Undefined!",
-                    tanggalRilis: game.value(forKey: "tanggalRilis") as? String ?? "Undefined!",
-                    peringkat: game.value(forKey: "peringkat") as? Double ?? 0.0))
+                    name: game.value(forKey: "judul") as? String ?? "Unknown!",
+                    image: game.value(forKey: "gambar") as? String ?? "Undefined!",
+                    release: game.value(forKey: "tanggalRilis") as? String ?? "Undefined!",
+                    rating: game.value(forKey: "peringkat") as? Double ?? 0.0))
             }
         } catch let err {
             print(err)
@@ -38,7 +38,7 @@ class DatabaseHelper {
 
     func checkingFavorite(id:Int) -> Bool {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return false }
-        var kembalian = false
+        var favorite = false
         let managedContext = appDelegate.persistentContainer.viewContext
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityFavorite)
         fetchRequest.predicate = NSPredicate(format: "id = %i", id)
@@ -46,14 +46,14 @@ class DatabaseHelper {
             let result = try managedContext.fetch(fetchRequest) as? [NSManagedObject]
 
             if (result?.count ?? 0) > 0 {
-                kembalian = true
+                favorite = true
             }
 
         } catch let err {
             print(err)
         }
 
-        return kembalian
+        return favorite
     }
 
     func deleteFavorite(id:Int) {
@@ -79,10 +79,10 @@ class DatabaseHelper {
         let userEntity = NSEntityDescription.entity(forEntityName: entityFavorite, in: managedContext)
         let insert = NSManagedObject(entity: userEntity!, insertInto: managedContext)
         insert.setValue(game.id, forKey: "id")
-        insert.setValue(game.gambar, forKey: "gambar")
-        insert.setValue(game.judul, forKey: "judul")
-        insert.setValue(game.peringkat, forKey: "peringkat")
-        insert.setValue(game.tanggalRilis, forKey: "tanggalRilis")
+        insert.setValue(game.image, forKey: "gambar")
+        insert.setValue(game.name, forKey: "judul")
+        insert.setValue(game.rating, forKey: "peringkat")
+        insert.setValue(game.release, forKey: "tanggalRilis")
 
         do {
             try managedContext.save()

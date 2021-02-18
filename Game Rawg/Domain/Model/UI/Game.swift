@@ -10,8 +10,8 @@ import Foundation
 
 struct Game: Decodable, Identifiable {
     let id : Int
-    let judul : String
-    let gambar : String
-    let tanggalRilis : String
-    let peringkat : Double
+    let name : String
+    let image : String
+    let release : String
+    let rating : Double
 }
