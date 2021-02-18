@@ -1,16 +1,23 @@
 //
-//  DatabaseHelper.swift
+//  LocaleDataSource.swift
 //  Game Rawg
 //
-//  Created by Hario Budiharjo on 02/08/20.
-//  Copyright © 2020 Hario Budiharjo. All rights reserved.
+//  Created by Hario Budiharjo on 18/02/21.
+//  Copyright © 2021 Hario Budiharjo. All rights reserved.
 //
 
 import Foundation
 import SwiftUI
 import CoreData
 
-class DatabaseHelper {
+protocol LocaleDataSource {
+    func readAllFavorite() -> [Game]
+    func checkingFavorite(id: Int) -> Bool
+    func deleteFavorite(id: Int)
+    func create(game: Game)
+}
+
+class LocaleDataSourceImpl: LocaleDataSource {
     let entityFavorite = "Favorite"
 
     func readAllFavorite() -> [Game] {

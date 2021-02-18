@@ -16,7 +16,7 @@ struct DetailView: View {
     @ObservedObject var viewmodel = GameViewModel(service: Injection.provideGameUseCase())
     @State var like = false
     let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext
-    let databaseHelper = DatabaseHelper()
+    let repository = Injection.provideGameRepository()
 
     init(game:Game) {
         self.game = game
@@ -77,9 +77,9 @@ struct DetailView: View {
                             self.like = !self.like
 
                             if self.like {
-                                self.databaseHelper.create(game: self.game)
+                                self.repository.create(game: self.game)
                             } else {
-                                self.databaseHelper.deleteFavorite(id: self.game.id)
+                                self.repository.deleteFavorite(id: self.game.id)
                             }
                         }, label: {
                             Image(systemName: like ? "heart.fill" : "heart")
@@ -94,7 +94,7 @@ struct DetailView: View {
                 self.imageLoader.getDataImage()
             }
             self.viewmodel.loadDataDetailGame(id: String(self.game.id))
-            if self.databaseHelper.checkingFavorite(id: self.game.id) {
+            if self.repository.checkingFavorite(id: self.game.id) {
                 self.like = true
             }
 

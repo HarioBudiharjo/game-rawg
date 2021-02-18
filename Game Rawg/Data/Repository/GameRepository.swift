@@ -12,25 +12,26 @@ protocol GameRepository {
     func fetchListGame(completion: @escaping ([Game]?) -> Void)
     func fetchDetailGame(id: String,completion: @escaping (GameDetail?) -> Void)
     func fetchSearchGame(search: String,completion: @escaping ([Game]?) -> Void)
+    func readAllFavorite() -> [Game]
+    func checkingFavorite(id: Int) -> Bool
+    func deleteFavorite(id: Int)
+    func create(game: Game)
 }
 
 class GameRepositoryImpl: GameRepository {
-    private let apiUrlBase = "https://api.rawg.io/api"
-    func fetchSearchGame(search: String,completion: @escaping ([Game]?) -> Void) {
-        let encodeUrl = search.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? ""
-        guard let url = URL(string: "\(apiUrlBase)/games?search=\(String(describing: encodeUrl))") else { return }
-        getData(url: url) { (data) in
-            guard let data = data else {
-                completion(nil)
-                return
-            }
-            guard let game = try? JSONDecoder().decode(SearchGameResponse.self, from: data) else {
-                completion(nil)
-                return
-            }
 
+    private let remoteDataSource: RemoteDataSource
+    private let localeDataSource: LocaleDataSource
+
+    init(remoteDataSource: RemoteDataSource, localeDataSource: LocaleDataSource) {
+        self.remoteDataSource = remoteDataSource
+        self.localeDataSource = localeDataSource
+    }
+
+    func fetchSearchGame(search: String,completion: @escaping ([Game]?) -> Void) {
+        self.remoteDataSource.fetchSearchGame(search: search) { (game) in
             var games : [Game] = []
-            game.results?.forEach({ (result) in
+            game?.results?.forEach({ (result) in
                 games.append(Game(
                     id: result.id ?? 0,
                     name: result.name ?? "Unknnown",
@@ -45,19 +46,9 @@ class GameRepositoryImpl: GameRepository {
     }
 
     func fetchListGame(completion: @escaping ([Game]?) -> Void) {
-        guard let url = URL(string: "\(apiUrlBase)/games") else { return }
-        getData(url: url) { (data) in
-            guard let data = data else {
-                completion(nil)
-                return
-            }
-            guard let game = try? JSONDecoder().decode(ListGameResponse.self, from: data) else {
-                completion(nil)
-                return
-            }
-
+        self.remoteDataSource.fetchListGame { (game) in
             var games : [Game] = []
-            game.results?.forEach({ (result) in
+            game?.results?.forEach({ (result) in
                 games.append(Game(
                     id: result.id ?? 0,
                     name: result.name ?? "",
@@ -72,17 +63,11 @@ class GameRepositoryImpl: GameRepository {
     }
 
     func fetchDetailGame(id: String,completion: @escaping (GameDetail?) -> Void) {
-        guard let url = URL(string: "\(apiUrlBase)/games/\(id)") else { return }
-        getData(url: url) { (data) in
-            guard let data = data else {
+        self.remoteDataSource.fetchDetailGame(id: id) { (game) in
+            guard let game = game else {
                 completion(nil)
                 return
             }
-            guard let game = try? JSONDecoder().decode(DetailGameResponse.self, from: data) else {
-                completion(nil)
-                return
-            }
-
             let detailGame = GameDetail(
                 id: game.id ?? 0 ,
                 name: game.name ?? "",
@@ -97,15 +82,19 @@ class GameRepositoryImpl: GameRepository {
         }
     }
 
-    func getData(url:URL,completion: @escaping (Data?) -> Void) {
-        URLSession.shared.dataTask(with: url) {(data, _, _) in
-            guard let data = data else {
-                completion(nil)
-                return
-            }
-            DispatchQueue.main.async {
-                completion(data)
-            }
-        }.resume()
+    func readAllFavorite() -> [Game] {
+        return self.localeDataSource.readAllFavorite()
+    }
+
+    func checkingFavorite(id: Int) -> Bool {
+        return self.localeDataSource.checkingFavorite(id: id)
+    }
+
+    func deleteFavorite(id: Int) {
+        self.localeDataSource.deleteFavorite(id: id)
+    }
+
+    func create(game: Game) {
+        self.localeDataSource.create(game: game)
     }
 }

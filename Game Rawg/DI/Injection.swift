@@ -15,7 +15,17 @@ final class Injection: NSObject {
     }
 
     static func provideGameRepository() -> GameRepository {
-        let gameRepository = GameRepositoryImpl()
+        let gameRepository = GameRepositoryImpl(remoteDataSource: Injection.providerRemoteDataSource(), localeDataSource: Injection.providerLocaleDataSource())
         return gameRepository
+    }
+
+    static func providerRemoteDataSource() -> RemoteDataSource {
+        let remoteDataSource = RemoteDataSourceImpl()
+        return remoteDataSource
+    }
+
+    static func providerLocaleDataSource() -> LocaleDataSource {
+        let localeDataSource = LocaleDataSourceImpl()
+        return localeDataSource
     }
 }

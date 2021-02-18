@@ -10,7 +10,7 @@ import SwiftUI
 import CoreData
 
 struct FavoriteView: View {
-    let databaseHelper = DatabaseHelper()
+    let repository = Injection.provideGameRepository()
     @State var games = [Game]()
     var body: some View {
         NavigationView {
@@ -25,7 +25,7 @@ struct FavoriteView: View {
                     Text("No games or error!")
                 }
             }.onAppear {
-                let game = self.databaseHelper.readAllFavorite()
+                let game = self.repository.readAllFavorite()
                 self.games = game
             }
             .navigationBarTitle(Text("Favorite"))
