@@ -83,7 +83,12 @@ class GameRepositoryImpl: GameRepository {
     }
 
     func readAllFavorite() -> [Game] {
-        return self.localeDataSource.readAllFavorite()
+        let game = self.localeDataSource.readAllFavorite()
+        let output = game.map { (data) in
+            return Game(id: data.id, name: data.name, image: data.image, release: data.release, rating: data.rating)
+        }
+
+        return output
     }
 
     func checkingFavorite(id: Int) -> Bool {

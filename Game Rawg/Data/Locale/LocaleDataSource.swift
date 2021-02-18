@@ -11,7 +11,7 @@ import SwiftUI
 import CoreData
 
 protocol LocaleDataSource {
-    func readAllFavorite() -> [Game]
+    func readAllFavorite() -> [GameEntity]
     func checkingFavorite(id: Int) -> Bool
     func deleteFavorite(id: Int)
     func create(game: Game)
@@ -20,16 +20,16 @@ protocol LocaleDataSource {
 class LocaleDataSourceImpl: LocaleDataSource {
     let entityFavorite = "Favorite"
 
-    func readAllFavorite() -> [Game] {
+    func readAllFavorite() -> [GameEntity] {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return [] }
         let managedContext = appDelegate.persistentContainer.viewContext
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityFavorite)
-        var games = [Game]()
+        var games = [GameEntity]()
         do {
             let result = try managedContext.fetch(fetchRequest) as? [NSManagedObject]
 
             result?.forEach { game in
-                games.append(Game(
+                games.append(GameEntity(
                     id: game.value(forKey: "id") as? Int ?? 0,
                     name: game.value(forKey: "judul") as? String ?? "Unknown!",
                     image: game.value(forKey: "gambar") as? String ?? "Undefined!",
